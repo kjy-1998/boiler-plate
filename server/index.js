@@ -2,8 +2,6 @@
 const express = require('express');
 // 익스프레스 함수를 사용하겠다
 const app = express();
-// 포트는 3100을 사용
-const port = 3100;
 // 바디파서를 사용하겠다
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -35,6 +33,10 @@ mongoose.connect(config.mongoURI, {
 }).then(() => console.log('MongoDB Connected...')).catch(err => console.log(err));
 
 app.get('/', (req, res) => res.send('오늘도 모험을 떠나요.'));
+
+app.get('/api/hello', (req, res) => {
+    res.send('안녕하세요 ~');
+});
 // register router(엔드포인트 register)
 app.post('/api/users/register', (req, res) => {
     // 회원가입 할 때 필요한 정보들을 client에서 가져오면
@@ -122,4 +124,6 @@ app.get('/api/users/logout', auth, (req, res) => {
     )
 });
 
+// 포트는 5000을 사용
+const port = 5000;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
